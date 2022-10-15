@@ -4,7 +4,7 @@
 "height": 400,
 "title": "Petrol/Gas Price Worldwide",
 "data": {
-"url": "https://raw.githubusercontent.com/LeeZhenYan/FIT3179/main/Petrol%20Dataset%20June%2020%202022%20-%20Cleaned.csv"
+"url": "https://raw.githubusercontent.com/LeeZhenYan/week10/main/Petrol%20Dataset%20June%2020%202022%20-%20Cleaned.csv"
 },
 "params": [
 {
