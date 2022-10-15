@@ -54,7 +54,7 @@
 "legend": {"format": ".1s"}
 },
 "color": {
-"field": "Continent ",
+"field": "Continent",
 "type": "nominal",
 "scale": {
     "domain": [
