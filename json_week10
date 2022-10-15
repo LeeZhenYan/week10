@@ -1,0 +1,115 @@
+{
+"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+"width": 650,
+"height": 400,
+"title": "Petrol/Gas Price Worldwide",
+"data": {
+"url": "https://raw.githubusercontent.com/LeeZhenYan/FIT3179/main/Petrol%20Dataset%20June%2020%202022%20-%20Cleaned.csv"
+},
+"params": [
+{
+"name": "Consumption",
+"value": 0,
+"bind": {
+"input": "range",
+"min": 0,
+"max": 20000000,
+"step": 500,
+"name": "Minimum Consumption: "
+}
+}
+],
+"transform": [
+    {"filter": "datum['Yearly Gallons Per Capita'] > 0"},
+{"filter": "datum['Price Per Liter (PKR)'] > 0"},
+{"filter": "datum['Daily Oil Consumption (Barrels)'] > Consumption"}
+],
+"encoding": {
+"x": {
+"field": "Yearly Gallons Per Capita",
+"type": "quantitative",
+"title": "Yearly Gallons Per Capita",
+"axis": {"tickCount": 4},
+"scale": {"type": "log", "domain": [1, 10000]}
+},
+"y": {
+"field": "Price Per Liter (PKR)",
+"type": "quantitative",
+"axis": {"tickCount": 4},
+"scale": {"type": "log", "domain": [1, 10000]}
+}
+},
+"layer": [
+{
+"mark": "circle",
+"encoding": {
+"size": {
+"field": "Daily Oil Consumption (Barrels)",
+"type": "quantitative",
+"scale": {
+"type": "threshold",
+"domain": [1000, 10000, 100000, 1000000, 10000000, 20000000],
+"range": [50, 100, 200, 350, 500, 650]
+},
+"legend": {"format": ".1s"}
+},
+"color": {
+"field": "Continent ",
+"type": "nominal",
+"scale": {
+    "domain": [
+"North America",
+"South America",
+"Europe",
+"Africa",
+"Asia",
+"Oceania"
+],
+"range": [
+"#e41a1c",
+"#984ea3",
+"#ff7f00",
+"#a6cee3",
+"#377eb8",
+"#a65628"
+]
+}
+},
+"opacity": { "value": 0.6},
+"tooltip": [
+{"field": "Country", "type": "nominal"},
+{"field": "Yearly Gallons Per Capita", "type": "quantitative", "format": ","},
+{"field": "Price Per Liter (PKR)", "type": "quantitative", "format": ","},
+{"field": "Daily Oil Consumption (Barrels)", "type": "quantitative", "format": ","}
+]
+}
+},
+{
+"mark": {
+"type": "text",
+"align": "right",
+"baseline": "middle",
+"dx": -15,
+"fontSize": 11.5,
+"fontStyle": "italic"
+},
+"encoding": {
+"text": {"field": "Country", "type": "nominal"},
+"color": {"value": "black"},
+"opacity": {
+    "condition": {
+"test": "datum['Country'] =='Singapore' || datum['Country'] == 'Venezuela' || datum['Country'] =='Algeria' || datum['Country'] == 'Vanuatu' || datum['Country'] =='Yemen' || datum['Country'] == 'Malawi' || datum['Country'] =='Malta'",
+"value": 1
+},
+"value": 0
+},
+"tooltip": [
+{"field": "Country", "type": "nominal"},
+{"field": "Yearly Gallons Per Capita", "type": "quantitative", "format": ","},
+{"field": "Price Per Liter (PKR)", "type": "quantitative", "format": ","},
+{"field": "Daily Oil Consumption (Barrels)", "type": "quantitative", "format": ","}
+]
+}
+}
+]
+}

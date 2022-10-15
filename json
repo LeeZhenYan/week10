@@ -1,0 +1,37 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Petrol/Gas Prices Worldwide",
+    "width": 800,
+    "height": 400,
+    "projection": {"type": "equalEarth"},
+    "data": {
+    "url": "https://raw.githubusercontent.com/LeeZhenYan/FIT3179/main/ne_110m.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+    },
+    "transform": [
+    {
+    "lookup": "properties.NAME",
+    "from": {
+    "data": {
+    "url": "https://raw.githubusercontent.com/LeeZhenYan/FIT3179/main/Petrol%20Dataset%20June%2020%202022.csv"
+    },
+    "key": "Country",
+    "fields": ["Daily Oil Consumption (Barrels)"]
+}
+},
+{"calculate": "datum['Daily Oil Consumption (Barrels)'] + 0.1", "as": "Number of Barrels"}
+],
+"mark": {"type": "geoshape"},
+"encoding": {
+"color": {
+"field": "Number of Barrels",
+"type": "quantitative",
+"scale": {"type": "log"}
+},
+"tooltip": [
+{"field": "properties.NAME", "type": "nominal", "title":
+"Country"},
+{"field": "Daily Oil Consumption (Barrels)", "type": "quantitative"}
+]
+}
+}
